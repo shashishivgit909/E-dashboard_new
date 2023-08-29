@@ -25,11 +25,11 @@ const Login = () => {
                 'Content-Type': 'application/json'
             }
         });
-        result = await result.json(); //result store the result send by API 
+        result = await result.json(); //result store the result send by API (contains auth:token ,user: {email, pass})
         //NOte: login Api is checking email, password in database if found then give response as {name, email, id } and if not found then response is "user not found"
         console.warn(result)
-        if (result.auth) {
-             localStorage.setItem('user', JSON.stringify(result.user));
+        if (result.auth) { //checking if token
+             localStorage.setItem('user', JSON.stringify(result.user)); // store data in local 
              localStorage.setItem('token', JSON.stringify(result.auth)); //token is key in local storage
             navigate("/")
         } else {

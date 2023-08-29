@@ -16,8 +16,8 @@ const Nav = () => {
                 <ul className="nav-ul">
                     <li><Link to="/">Products</Link></li>
                     <li><Link to="/add">Add Products</Link></li>
-                    <li><Link to="/update/:id"> Update Products</Link></li>
-                    <li><Link to="/profile">Profile</Link></li>
+                    {/* <li><Link to="/update/:id"> Update Products</Link></li> */}
+                    {/* <li><Link to="/profile">Profile</Link></li> */}
 
                     {/* this implement if auth then show logout field else show signUp filed */}
                     {/* <li> {auth ? <Link onClick={Logout}to="/signup">logout</Link> :

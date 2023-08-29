@@ -5,7 +5,7 @@ const Product = require("./database/Product");
 const User = require('./database/User');
 const app = express();
 
-const Jwt = require("jsonwebtoken");
+const Jwt = require("jsonwebtoken"); // JWT AUTHENTICATION IS TRIED  TO APPLY BUT HAVENOT APPLIED IT .
 const jwtkey = "e-comm"; // this is kept secret  , otherwise any user  cangenerate token by this.
 
 app.use(express.json());
@@ -119,5 +119,14 @@ app.get("/search/:key", async (req, resp) => {
     });
     resp.send(result);
 })
+
+// //middleware 
+// function tokenVerification(req, resp , next)
+// {
+
+//     let token =req.header[Authorization];
+//     token =token .split(' ')[1];
+//     console.log("middleware called",token)
+// }
 
 app.listen(5000);
