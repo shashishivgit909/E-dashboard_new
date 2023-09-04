@@ -14,7 +14,7 @@ const Login = () => {
         if (auth) {
             navigate("/")
         }
-    }, []);
+    },[navigate]);
 
     //integrating login Api with react.(i.e when email, pass entered in input and when hit login , we call Api and Api does its work.)
     const handleLogin = async () => {
