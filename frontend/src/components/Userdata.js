@@ -4,7 +4,7 @@ export default function Userdata() {
 
   getData(async () => {
     try {
-      let response = await fetch("https://jsonplaceholder.typicode.com/users");
+      let response = await fetch("https://e-commerce-dashboard-updated3.onrender.com/users");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

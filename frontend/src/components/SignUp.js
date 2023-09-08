@@ -20,7 +20,7 @@ const SignUp = () => {
         try {
             //here intergrating Signup Api(postApi using fetch function()) : intergrating means , data collected by signup are sending to database using Post api .
             // "http://localhost:5000/register" , url of post API  given by backend developer .
-               const response = await fetch("http://localhost:5000/register", {
+               const response = await fetch("https://e-commerce-dashboard-updated3.onrender.com/register", {
                 method: 'post',
                 body: JSON.stringify({ name, email, password }),
                 headers: {

@@ -21,7 +21,7 @@ const Login = () => {
         try {
             
        
-        const response = await fetch("http://localhost:5000/login", {
+        const response = await fetch("https://e-commerce-dashboard-updated3.onrender.com/login", {
             method: 'post',
             body: JSON.stringify({ email, password }), //thisline is sending data{email, password} to API 
             headers: {

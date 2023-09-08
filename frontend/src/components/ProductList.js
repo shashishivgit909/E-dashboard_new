@@ -27,7 +27,7 @@
 //     const deleteProduct = async (id) => {
 //         console.warn(id); //ust print id for which it is called .
 //         try {
-//             const response = await fetch(`http://localhost:5000/delete/${id}`, {  //using string template`
+//             const response = await fetch(`/delete/${id}`, {  //using string template`
 //                 method: "Delete"
 //             });
 //             if (!response.ok) {
@@ -122,7 +122,7 @@ export default function ProductList() {
 
     const getProducts = async () => {
         try {
-            const response = await fetch('http://localhost:5000/products');
+            const response = await fetch('https://e-commerce-dashboard-updated3.onrender.com/products');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -137,7 +137,7 @@ export default function ProductList() {
     const deleteProduct = async (id) => {
         console.warn(id); // Just print id for which it is called.
         try {
-            const response = await fetch(`http://localhost:5000/delete/${id}`, {
+            const response = await fetch(`https://e-commerce-dashboard-updated3.onrender.com/delete/${id}`, {
                 method: "Delete"
             });
             if (!response.ok) {
@@ -159,7 +159,7 @@ export default function ProductList() {
         let key = event.target.value;
         if (key) { // This handles if there is something in the key (i.e., the input box is not empty).
             try {
-                const response = await fetch(`http://localhost:5000/search/${key}`);
+                const response = await fetch(`https://e-commerce-dashboard-updated3.onrender.com/search/${key}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

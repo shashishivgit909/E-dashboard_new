@@ -19,7 +19,7 @@ const UpdateProduct = () => {
     const getProductDetails = async () => {
          console.log(param.id); 
          try {
-            let response = await fetch(`http://localhost:5000/update/${param.id}`);
+            let response = await fetch(`https://e-commerce-dashboard-updated3.onrender.com/update/${param.id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -40,7 +40,7 @@ const UpdateProduct = () => {
     const updateProduct = async () => {
         console.warn(name, price, category, company)
         try {
-            const response = await fetch(`http://localhost:5000/update/${param.id}`, {
+            const response = await fetch(`https://e-commerce-dashboard-updated3.onrender.com/update/${param.id}`, {
                 method: 'Put',
                 body: JSON.stringify({ name, price, category, company }),
                 headers: {
