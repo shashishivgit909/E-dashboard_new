@@ -23,7 +23,7 @@ const Login = () => {
        
         const response = await fetch("https://e-commerce-dashboard-updated3.onrender.com/login", {
             method: 'post',
-            body: JSON.stringify({ email, password }), //thisline is sending data{email, password} to API 
+            body: JSON.stringify({ email, password }), //thisline is sending result{email, password} to API 
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -32,11 +32,17 @@ const Login = () => {
             // Handle HTTP error status codes
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-       const result = await response.json(); //result store the result send by API (contains auth:token ,user: {email, pass})
+        let result;
+            try {
+                result = await response.json();
+                // Process and use the result
+            } catch (parseError) {
+                console.error('Error parsing JSON response:', parseError);
+            }//result store the result send by API (contains auth:token ,user: {email, pass})
         //NOte: login Api is checking email, password in database if found then give response as {name, email, id } and if not found then response is "user not found"
         console.warn(result)
         if (result.auth) { //checking if token
-             localStorage.setItem('user', JSON.stringify(result.user)); // store data in local 
+             localStorage.setItem('user', JSON.stringify(result.user)); // store result in local 
              localStorage.setItem('token', JSON.stringify(result.auth)); //token is key in local storage
             navigate("/")
         } else {

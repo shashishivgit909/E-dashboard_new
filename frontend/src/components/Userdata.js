@@ -8,8 +8,14 @@ export default function Userdata() {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      let result = await result.json();
-
+      // let result = await result.json();
+      let result;
+      try {
+        result = await response.json();
+        // Process and use the result
+      } catch (parseError) {
+        console.error('Error parsing JSON response:', parseError);
+      }
     } catch (error) {
       console.log("cannot fetch data");
     }

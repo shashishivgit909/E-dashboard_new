@@ -50,7 +50,14 @@ const UpdateProduct = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const result = await response.json();
+            //const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+                // Process and use the result
+            } catch (parseError) {
+                console.error('Error parsing JSON response:', parseError);
+            }
             if (result) {
                 navigate('/')
             }  

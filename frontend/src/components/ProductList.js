@@ -126,7 +126,14 @@ export default function ProductList() {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const result = await response.json();
+            //const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+                // Process and use the result
+            } catch (parseError) {
+                console.error('Error parsing JSON response:', parseError);
+            }
             setProducts(result);
         } catch (error) {
             // Handle errors here
@@ -143,7 +150,15 @@ export default function ProductList() {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const result = await response.json();
+            //const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+                // Process and use the result
+
+            } catch (parseError) {
+                console.error('Error parsing JSON response:', parseError);
+            }
             console.log(result);
             console.log("hello from frontend");
             // There is a need to use condition to call getProducts because if not, then not needed to show the same list by calling API because nothing is changed; the same list is already visible on the page.
@@ -163,7 +178,14 @@ export default function ProductList() {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                const result = await response.json()
+                //const result = await response.json()
+                let result;
+                try {
+                    result = await response.json();
+                    // Process and use the result
+                } catch (parseError) {
+                    console.error('Error parsing JSON response:', parseError);
+                }
                 if (result) {
                     setProducts(result); // It sets state: product value so rerenders occur, and the list will be printed for this product
                 }
@@ -189,7 +211,7 @@ export default function ProductList() {
                 <li>Category</li>
                 <li>Operation</li>
             </ul>
-            
+
             {products.length > 0 ? (
                 products.map((item, index) => (
                     <ul key={item._id}>

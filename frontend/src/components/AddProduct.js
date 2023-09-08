@@ -33,8 +33,13 @@ const AddProduct = () => {
                 // Handle HTTP error status codes
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
-            const data = await response.json();
+            let data;
+            try {
+                data = await response.json();
+                // Process and use the data
+            } catch (parseError) {
+                console.error('Error parsing JSON response:', parseError);
+            }
 
             // Process and use the data
             console.log(data);
