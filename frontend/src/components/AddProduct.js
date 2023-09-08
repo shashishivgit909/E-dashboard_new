@@ -18,7 +18,29 @@ const AddProduct = () => {
         }
 
         // Note: since here user is alreday log in so we have its data on local storage so we get it here.
-        const userId = JSON.parse(localStorage.getItem('user'))._id;
+        //const userId = JSON.parse(localStorage.getItem('user'))._id;
+        let userId;
+        try {
+            const userJSON = localStorage.getItem('user');
+            if (userJSON) {
+                const user = JSON.parse(userJSON);
+                if (user._id) {
+                    userId = user._id;
+                } else {
+                    // Handle the case where the user object doesn't have an _id property
+                    console.error('User object does not contain _id property');
+                }
+            } else {
+                // Handle the case where 'user' data is not found in localStorage
+                console.error('User data not found in localStorage');
+            }
+        } catch (error) {
+            // Handle JSON parsing errors or other potential issues
+            console.error('Error while parsing user data:', error);
+        }
+
+        // Now you can use 'userId', which either contains the parsed _id or is undefined.
+
         try {
             // Perform the API request here
             const response = await fetch("https://e-commerce-dashboard-updated3.onrender.com/add-product", {

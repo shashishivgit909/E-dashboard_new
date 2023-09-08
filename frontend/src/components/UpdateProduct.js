@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams,useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 const UpdateProduct = () => {
     const [name, setName] = React.useState('');
@@ -7,36 +7,43 @@ const UpdateProduct = () => {
     const [category, setCategory] = React.useState('');
     const [company, setCompany] = React.useState('');
     const param = useParams();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         getProductDetails();
-            // eslint-disable-next-line react-hooks/exhaustive-deps 
-    },[])
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
+    }, [])
 
     //this integration function and below integration function has same url for fetch BUt this use: get method and  just below one uses "put method so there is no problem , but if both method are also same then we need to use different route for API a  slight change "
     const getProductDetails = async () => {
-         console.log(param.id); 
-         try {
+        console.log(param.id);
+        try {
             let response = await fetch(`https://e-commerce-dashboard-updated3.onrender.com/update/${param.id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-           const result = await response.json();
+            //const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+                // Process and use the result
+            } catch (parseError) {
+                console.error('Error parsing JSON response:', parseError);
+            }
             console.log(result);
             // setting values into state so that value can appear in input box.
             setName(result.result.name);
             setPrice(result.result.price);
             setCategory(result.result.category);
             setCompany(result.result.company);
-         } catch (error) {
+        } catch (error) {
             console.error('API request error:', error);
-         }
-       
+        }
+
 
     }
- //integrating updateProduct API 
+    //integrating updateProduct API 
     const updateProduct = async () => {
         console.warn(name, price, category, company)
         try {
@@ -60,11 +67,11 @@ const UpdateProduct = () => {
             }
             if (result) {
                 navigate('/')
-            }  
+            }
         } catch (error) {
-            console.error('API request error:', error);  
+            console.error('API request error:', error);
         }
-        
+
 
     }
 
