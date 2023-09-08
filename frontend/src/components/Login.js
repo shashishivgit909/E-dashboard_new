@@ -18,14 +18,21 @@ const Login = () => {
 
     //integrating login Api with react.(i.e when email, pass entered in input and when hit login , we call Api and Api does its work.)
     const handleLogin = async () => {
-        let result = await fetch("http://localhost:5000/login", {
+        try {
+            
+       
+        const response = await fetch("http://localhost:5000/login", {
             method: 'post',
             body: JSON.stringify({ email, password }), //thisline is sending data{email, password} to API 
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        result = await result.json(); //result store the result send by API (contains auth:token ,user: {email, pass})
+        if (!response.ok) {
+            // Handle HTTP error status codes
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+       const result = await response.json(); //result store the result send by API (contains auth:token ,user: {email, pass})
         //NOte: login Api is checking email, password in database if found then give response as {name, email, id } and if not found then response is "user not found"
         console.warn(result)
         if (result.auth) { //checking if token
@@ -35,6 +42,11 @@ const Login = () => {
         } else {
             alert("Please enter connect details")
         }
+    } catch (error) {
+        
+        console.error('API request error:', error);
+    }
+    
     }
 
     return (

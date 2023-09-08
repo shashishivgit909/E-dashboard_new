@@ -18,30 +18,46 @@ const UpdateProduct = () => {
     //this integration function and below integration function has same url for fetch BUt this use: get method and  just below one uses "put method so there is no problem , but if both method are also same then we need to use different route for API a  slight change "
     const getProductDetails = async () => {
          console.log(param.id); 
-        let result = await fetch(`http://localhost:5000/update/${param.id}`);
-        result = await result.json();
-        console.log(result);
-        // setting values into state so that value can appear in input box.
-        setName(result.result.name);
-        setPrice(result.result.price);
-        setCategory(result.result.category);
-        setCompany(result.result.company);
+         try {
+            let response = await fetch(`http://localhost:5000/update/${param.id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+           const result = await response.json();
+            console.log(result);
+            // setting values into state so that value can appear in input box.
+            setName(result.result.name);
+            setPrice(result.result.price);
+            setCategory(result.result.category);
+            setCompany(result.result.company);
+         } catch (error) {
+            console.error('API request error:', error);
+         }
+       
 
     }
  //integrating updateProduct API 
     const updateProduct = async () => {
         console.warn(name, price, category, company)
-        let result = await fetch(`http://localhost:5000/update/${param.id}`, {
-            method: 'Put',
-            body: JSON.stringify({ name, price, category, company }),
-            headers: {
-                'Content-Type': 'Application/json'
+        try {
+            const response = await fetch(`http://localhost:5000/update/${param.id}`, {
+                method: 'Put',
+                body: JSON.stringify({ name, price, category, company }),
+                headers: {
+                    'Content-Type': 'Application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-        });
-        result = await result.json();
-        if (result) {
-            navigate('/')
+            const result = await response.json();
+            if (result) {
+                navigate('/')
+            }  
+        } catch (error) {
+            console.error('API request error:', error);  
         }
+        
 
     }
 
@@ -74,3 +90,5 @@ const UpdateProduct = () => {
 }
 
 export default UpdateProduct;
+
+

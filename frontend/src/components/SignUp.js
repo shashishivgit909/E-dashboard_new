@@ -20,18 +20,21 @@ const SignUp = () => {
         try {
             //here intergrating Signup Api(postApi using fetch function()) : intergrating means , data collected by signup are sending to database using Post api .
             // "http://localhost:5000/register" , url of post API  given by backend developer .
-               result = await fetch("http://localhost:5000/register", {
+               const response = await fetch("http://localhost:5000/register", {
                 method: 'post',
                 body: JSON.stringify({ name, email, password }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-             result = await result.json();
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const result = await response.json();
             // result = await JSON.parse(result);
             console.warn(result);
         }
-        catch (e) {
+        catch (error) {
             console.log("erro occured");
         }
 
@@ -60,3 +63,4 @@ const SignUp = () => {
     )
 }
 export default SignUp;
+
