@@ -89,6 +89,7 @@ const Nav = () => {
                 <ul className="nav-ul nav-right">
                     <li><Link to="/login">Login</Link></li>
                     <li><Link to="/signup">SignUp</Link></li>
+                    <li><Link onClick={Logout} to="/signup">Logout({userName})</Link></li>
                 </ul>
             )}
         </div>
