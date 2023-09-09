@@ -38,7 +38,7 @@ const SignUp = () => {
                 console.log(result);
                 if (result && result._id) {
                     // Store the user data in local storage
-                    localStorage.setItem("user", JSON.stringify(result));
+                    localStorage.setItem("user", JSON.stringify(result.result));
                     // Redirect to the home page
                     navigate('/');
                 } else {
