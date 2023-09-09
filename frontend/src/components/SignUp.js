@@ -36,7 +36,7 @@ const SignUp = () => {
                 const result = await response.json();
                 // Check if the result contains the expected data
                 console.log(result);
-                if (result && result._id) {
+                if (result.result && result.result._id) {
                     // Store the user data in local storage
                     localStorage.setItem("user", JSON.stringify(result.result));
                     // Redirect to the home page
